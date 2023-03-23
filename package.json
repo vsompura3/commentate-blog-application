@@ -1,0 +1,13 @@
+{
+  "name": "mern-stack-blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "client": "cd frontend && npm run dev",
+    "server": "cd backend && nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
