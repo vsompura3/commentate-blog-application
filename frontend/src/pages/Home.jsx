@@ -2,13 +2,24 @@ import { useEffect, useState } from 'react'
 
 export const Home = () => {
   const [posts, setPosts] = useState(null)
+  const [error, setError] = useState(null)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     async function fetchPosts() {
-      const response = await fetch('http://localhost:5500/api/posts')
-      const data = await response.json()
-      console.log(data)
-      setPosts(data)
+      setLoading(true)
+      try {
+        const response = await fetch('http://localhost:5500/api/posts')
+        const data = await response.json()
+        console.log(data)
+        setPosts(data)
+        setLoading(false)
+        setError(null)
+      } catch (err) {
+        console.log(err)
+        setError(err)
+        setLoading(false)
+      }
     }
     fetchPosts()
   }, [])
@@ -44,7 +55,8 @@ export const Home = () => {
       </header>
 
       <section className="container mx-auto px-5">
-        <div className="grid gap-4">
+        <div className="grid gap-12 sm:grid-cols-2">
+          {loading && <p className="text-center text-2xl">Loading...</p>}
           {posts &&
             posts.map(post => (
               <div
@@ -58,6 +70,9 @@ export const Home = () => {
                 </p>
               </div>
             ))}
+          {error && (
+            <p className="text-red-600 text-center text-2xl">{error.message}</p>
+          )}
         </div>
       </section>
     </div>
