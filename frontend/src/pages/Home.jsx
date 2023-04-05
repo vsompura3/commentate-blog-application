@@ -1,9 +1,16 @@
-import {useEffet} from 'react'
+import { useEffect, useState } from 'react'
+
 export const Home = () => {
-  useEffect(async () => {
-    const res = await fetch('http://localhost:5500/api/posts')
-    const data = await res.json()
-    console.log(data)
+  const [posts, setPosts] = useState(null)
+
+  useEffect(() => {
+    async function fetchPosts() {
+      const response = await fetch('http://localhost:5500/api/posts')
+      const data = await response.json()
+      console.log(data)
+      setPosts(data)
+    }
+    fetchPosts()
   }, [])
 
   return (
@@ -35,6 +42,24 @@ export const Home = () => {
           </p>
         </div>
       </header>
+
+      <section className="container mx-auto px-5">
+        <div className="grid gap-4">
+          {posts &&
+            posts.map(post => (
+              <div
+                key={post._id}
+                className="text-black border border-gray-700 rounded-md p-4 shadow-md"
+              >
+                <h2 className="text-2xl font-semibold">{post.title}</h2>
+                <p className="text-lg">{post.desc}</p>
+                <p className="">
+                  <span className="font-bold">Author:</span> {post.username}
+                </p>
+              </div>
+            ))}
+        </div>
+      </section>
     </div>
   )
 }

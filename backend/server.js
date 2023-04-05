@@ -8,8 +8,10 @@ const categoryRoute = require('./routes/categories')
 const multer = require('multer')
 const app = express()
 const port = process.env.PORT || 5500
+const cors = require('cors')
 
 dotenv.config()
+app.use(cors())
 app.use(express.json())
 
 // Connect to MongoDB Database
