@@ -44,7 +44,7 @@ export const Home = () => {
         </div>
       </div>
       <header className="container mx-auto px-5">
-        <div className="mt-16 mb-16 flex flex-col items-center md:mb-12 md:justify-between lg:flex-row">
+        <div className="mb-16 mt-16 flex flex-col items-center md:mb-12 md:justify-between lg:flex-row">
           <h1 className="text-5xl font-bold leading-tight tracking-tighter sm:text-6xl md:text-8xl lg:pr-8">
             Commentate.
           </h1>
@@ -61,7 +61,7 @@ export const Home = () => {
             posts.map((post) => (
               <div
                 key={post._id}
-                className="text-black border border-gray-700 rounded-md p-4 shadow-md"
+                className="rounded-md border border-gray-700 p-4 text-black shadow-md"
               >
                 <h2 className="text-2xl font-semibold">{post.title}</h2>
                 <p className="text-lg">{post.desc}</p>
@@ -71,7 +71,7 @@ export const Home = () => {
               </div>
             ))}
           {error && (
-            <p className="text-red-600 text-center text-2xl">{error.message}</p>
+            <p className="text-center text-2xl text-red-600">{error.message}</p>
           )}
         </div>
       </section>
