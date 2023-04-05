@@ -1,44 +1,44 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 
 export const Home = () => {
-  const [posts, setPosts] = useState(null)
-  const [error, setError] = useState(null)
-  const [loading, setLoading] = useState(false)
+  const [posts, setPosts] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function fetchPosts() {
-      setLoading(true)
+      setLoading(true);
       try {
-        const response = await fetch('http://localhost:5500/api/posts')
-        const data = await response.json()
-        console.log(data)
-        setPosts(data)
-        setLoading(false)
-        setError(null)
+        const response = await fetch("http://localhost:5500/api/posts");
+        const data = await response.json();
+        console.log(data);
+        setPosts(data);
+        setLoading(false);
+        setError(null);
       } catch (err) {
-        console.log(err)
-        setError(err)
-        setLoading(false)
+        console.log(err);
+        setError(err);
+        setLoading(false);
       }
     }
-    fetchPosts()
-  }, [])
+    fetchPosts();
+  }, []);
 
   return (
     <div className="min-h-screen">
       <div className="border-b border-gray-300 bg-gray-100">
         <div className="container mx-auto px-5">
           <p className="py-2 text-center text-sm">
-            The source code for this blog is{' '}
+            The source code for this blog is{" "}
             <a
               href="https://github.com/vsompura3/commentate-blog-application"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-success underline transition-colors duration-200"
             >
-              {' '}
+              {" "}
               available on GitHub.
-            </a>{' '}
+            </a>{" "}
             PRs are welcome.
           </p>
         </div>
@@ -58,7 +58,7 @@ export const Home = () => {
         <div className="grid gap-12 sm:grid-cols-2">
           {loading && <p className="text-center text-2xl">Loading...</p>}
           {posts &&
-            posts.map(post => (
+            posts.map((post) => (
               <div
                 key={post._id}
                 className="text-black border border-gray-700 rounded-md p-4 shadow-md"
@@ -76,5 +76,5 @@ export const Home = () => {
         </div>
       </section>
     </div>
-  )
-}
+  );
+};
